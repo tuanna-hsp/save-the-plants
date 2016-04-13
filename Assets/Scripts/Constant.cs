@@ -2,6 +2,6 @@
 using System.Collections;
 
 public static class Constant {
-    public const int map = 1;
-    public const int level = 1;
+    public static int map = 1;
+    public static int level = 1;
 }
