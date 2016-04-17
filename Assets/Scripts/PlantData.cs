@@ -1,28 +1,30 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class MonsterLevel {
+public class PlantLevel {
   public int cost;
   public GameObject visualization;
   public GameObject bullet;
   public float fireRate;
 }
 
-public class MonsterData : MonoBehaviour {
+public enum PlantType
+{
+    PLANT1, PLANT2, PLANT3
+}
 
-	public List<MonsterLevel> levels;
-	private MonsterLevel currentLevel;
+public class PlantData : MonoBehaviour {
 
-	
-	//1
-	public MonsterLevel CurrentLevel {
-		//2
+	public List<PlantLevel> levels;
+
+	private PlantLevel currentLevel;
+    
+	public PlantLevel CurrentLevel {
 		get {
 			return currentLevel;
 		}
-		//3
 		set {
 			currentLevel = value;
 			int currentLevelIndex = levels.IndexOf(currentLevel);
@@ -41,12 +43,12 @@ public class MonsterData : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
+	public virtual void Start () {
 	
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	public virtual void Update () {
 	
 	}
 
@@ -54,7 +56,7 @@ public class MonsterData : MonoBehaviour {
  		CurrentLevel = levels[0];
 	}
 
-	public MonsterLevel getNextLevel() {
+	public PlantLevel getNextLevel() {
 		int currentLevelIndex = levels.IndexOf (currentLevel);
 		int maxLevelIndex = levels.Count - 1;
 		if (currentLevelIndex < maxLevelIndex) {

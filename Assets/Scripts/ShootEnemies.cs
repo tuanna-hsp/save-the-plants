@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,13 +7,13 @@ public class ShootEnemies : MonoBehaviour {
 	public List<GameObject> enemiesInRange;
 
 	private float lastShotTime;
-	private MonsterData monsterData;
+	private PlantData monsterData;
 
 	// Use this for initialization
 	void Start () {
 		enemiesInRange = new List<GameObject>();
 		lastShotTime = Time.time;
-		monsterData = gameObject.GetComponentInChildren<MonsterData> ();
+		monsterData = gameObject.GetComponentInChildren<PlantData> ();
 	}
 	
 	// Update is called once per frame
