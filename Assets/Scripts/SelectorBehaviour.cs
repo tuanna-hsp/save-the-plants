@@ -10,6 +10,9 @@ public class SelectorBehaviour : MonoBehaviour
     public delegate void PlantCreateDelegate(GameObject selector, PlantType type);
     public PlantCreateDelegate plantCreateDelegate;
 
+    public delegate void PlantPreviewDelegate(PlantType type);
+    public PlantPreviewDelegate plantPreviewDelegate;
+
     private List<PlantItemBehaviour> plantBehaviourList = new List<PlantItemBehaviour>();
 
     // Use this for initialization
@@ -46,6 +49,10 @@ public class SelectorBehaviour : MonoBehaviour
     void onPlantHighlight(string description, int position)
     {
         setInfoText(description);
+        if (plantPreviewDelegate != null)
+        {
+            plantPreviewDelegate(PlantType.PLANT1);
+        }
 
         foreach (PlantItemBehaviour behaviour in plantBehaviourList)
         {
