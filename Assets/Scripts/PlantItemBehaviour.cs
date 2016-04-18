@@ -12,12 +12,19 @@ public class PlantItemBehaviour : MonoBehaviour
     public delegate void PlantSelectedDelegate(int position);
     public PlantSelectedDelegate plantSelectedDelegate;
 
+    public string Description
+    {
+        get {
+            return description.Replace("\\n", "\n");
+        }
+    }
+
     private int pressCount = 0;
 
     // Use this for initialization
     void Start()
     {
-        description = description.Replace("\\n", "\n");
+        
     }
 
     // Update is called once per frame
@@ -30,7 +37,7 @@ public class PlantItemBehaviour : MonoBehaviour
     {
         if (pressCount == 0 && plantHighlightDelegate != null)
         {
-            plantHighlightDelegate(description, position);
+            plantHighlightDelegate(Description, position);
         }
         else if (pressCount == 1 && plantSelectedDelegate != null)
         {

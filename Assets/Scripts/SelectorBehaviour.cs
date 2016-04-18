@@ -27,7 +27,7 @@ public class SelectorBehaviour : MonoBehaviour
                 behaviour.plantSelectedDelegate = onPlantSelected;
                 if (behaviour.position == 0)
                 {
-                    setInfoText(behaviour.description);
+                    setInfoText(behaviour.Description);
                 }
 
                 plantBehaviourList.Add(behaviour);

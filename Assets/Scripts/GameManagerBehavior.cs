@@ -17,6 +17,7 @@ public class GameManagerBehavior : MonoBehaviour {
 	public Text waveLabel;
 	public GameObject[] nextWaveLabels;
     public GameObject pauseMenu;
+    public GameObject tutorial;
 
 	public bool gameOver = false;
 
@@ -70,6 +71,14 @@ public class GameManagerBehavior : MonoBehaviour {
 		Gold = 1000;
 		Wave = 0;
 		Health = 5;
+
+        if (!PersistantManager.IsTutorialShown())
+        {
+            // Pause game and show tutorial screen
+            //Time.timeScale = 0;
+            ShowTutorial();
+            PersistantManager.SetTutorialAsShown();
+        }
 	}
 	
 	// Update is called once per frame
@@ -91,5 +100,15 @@ public class GameManagerBehavior : MonoBehaviour {
         Time.timeScale = 1;
         
         pauseMenu.SetActive(false);
+    }
+
+    public void ShowTutorial()
+    {
+        tutorial.SetActive(true);
+    }
+
+    public void HideTutorial()
+    {
+        tutorial.SetActive(false);
     }
 }
