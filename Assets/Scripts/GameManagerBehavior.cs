@@ -70,7 +70,7 @@ public class GameManagerBehavior : MonoBehaviour {
 	void Start () {
 		Gold = 1000;
 		Wave = 0;
-		Health = 5;
+		Health = healthIndicator.Length;
 
         if (!PersistantManager.IsTutorialShown())
         {
