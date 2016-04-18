@@ -57,8 +57,17 @@ public class PlacePlant : MonoBehaviour
 
         // By default the selector show above current object, 
         // check and adjust selector position y to display correctly
-        RectTransform rectTransform = (RectTransform) plantSelector.transform;
-        rectTransform.position -= new Vector3(0, rectTransform.rect.height);
+        if (shouldShowSelectorBelow())
+        {
+            RectTransform rectTransform = (RectTransform) plantSelector.transform;
+            rectTransform.position -= new Vector3(0, rectTransform.rect.height);
+        }
+    }
+
+    // Whether current open spot lied in the upper part of the screen
+    private bool shouldShowSelectorBelow()
+    {
+        return transform.position.y > 0;
     }
 
     private void onCreatePlant(GameObject selector, PlantType plantType)
