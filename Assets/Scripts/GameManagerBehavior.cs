@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -16,6 +16,7 @@ public class GameManagerBehavior : MonoBehaviour {
 
 	public Text waveLabel;
 	public GameObject[] nextWaveLabels;
+    public GameObject pauseMenu;
 
 	public bool gameOver = false;
 
@@ -75,4 +76,20 @@ public class GameManagerBehavior : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public void PauseGame()
+    {
+        Debug.Log("Game is pausing");
+        Time.timeScale = 0;
+        
+        pauseMenu.SetActive(true);
+    }
+
+    public void ResumeGame()
+    {
+        Debug.Log("Game is resuming");
+        Time.timeScale = 1;
+        
+        pauseMenu.SetActive(false);
+    }
 }

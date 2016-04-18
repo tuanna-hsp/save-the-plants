@@ -17,7 +17,7 @@ public class PlantItemBehaviour : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-
+        description = description.Replace("\\n", "\n");
     }
 
     // Update is called once per frame
