@@ -9,7 +9,7 @@ public class MenuController : MonoBehaviour {
     }
 
     public void OnHighscoreButtonClick() {
-
+        Application.LoadLevel("highscore");
     }
 
     public void OnTutorialButtonClick()
