@@ -3,7 +3,9 @@ using System.Collections;
 
 public class PlacePlant : MonoBehaviour
 {
-    public GameObject plantPrefab;
+    public GameObject plant1Prefab;
+    public GameObject plant2Prefab;
+    public GameObject plant3Prefab;
     public GameObject plantSelectorPrefab;
     public GameObject rangePrefab;
 
@@ -34,10 +36,12 @@ public class PlacePlant : MonoBehaviour
 
     void OnMouseUp()
     {
+        Debug.Log("Open spot clicked");
         if (plant == null)
         {
             if (plantSelector == null)
             {
+                Debug.Log("Show plant selector");
                 showPlantSelector();
             }
         }
@@ -116,9 +120,10 @@ public class PlacePlant : MonoBehaviour
         switch (plantType)
         {
             case PlantType.PLANT1:
-                plant = (GameObject) Instantiate(plantPrefab, transform.position, Quaternion.identity);
+                plant = (GameObject) Instantiate(plant1Prefab, transform.position, Quaternion.identity);
                 break;
             case PlantType.PLANT2:
+                plant = (GameObject) Instantiate(plant2Prefab, transform.position, Quaternion.identity);
                 break;
             case PlantType.PLANT3:
                 break;
@@ -139,9 +144,10 @@ public class PlacePlant : MonoBehaviour
         switch (type)
         {
             case PlantType.PLANT1:
-                rangeRadius = plantPrefab.GetComponent<CircleCollider2D>().radius;
+                rangeRadius = plant1Prefab.GetComponent<CircleCollider2D>().radius;
                 break;
             case PlantType.PLANT2:
+                rangeRadius = plant2Prefab.GetComponent<CircleCollider2D>().radius;
                 break;
             case PlantType.PLANT3:
                 break;
@@ -155,7 +161,7 @@ public class PlacePlant : MonoBehaviour
 
     private bool canPlaceMonster()
     {
-        int cost = plantPrefab.GetComponent<PlantData>().levels[0].cost;
+        int cost = plant1Prefab.GetComponent<PlantData>().levels[0].cost;
         return plant == null && gameManager.Gold >= cost;
     }
 

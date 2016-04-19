@@ -10,7 +10,7 @@ public class GameManagerBehavior : MonoBehaviour {
   		get { return gold; }
   		set {
 			gold = value;
-    		goldLabel.GetComponent<Text>().text = "GOLD: " + gold;
+    		goldLabel.GetComponent<Text>().text = "" + gold;
 		}
 	}
 
@@ -31,7 +31,7 @@ public class GameManagerBehavior : MonoBehaviour {
 					nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
 				}
 			}
-			waveLabel.text = "WAVE: " + (wave + 1);
+			waveLabel.text = "" + (wave + 1);
 		}
 	}
 
@@ -48,7 +48,7 @@ public class GameManagerBehavior : MonoBehaviour {
 			}
 			// 2
 			health = value;
-			healthLabel.text = "HEALTH: " + health;
+			healthLabel.text = "" + health;
 			// 2
 			if (health <= 0 && !gameOver) {
 				gameOver = true;

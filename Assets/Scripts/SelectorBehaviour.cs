@@ -67,8 +67,15 @@ public class SelectorBehaviour : MonoBehaviour
     {
         if (plantCreateDelegate != null)
         {
-            // TODO: More type
-            plantCreateDelegate(gameObject, PlantType.PLANT1);
+            switch (position)
+            {
+                case 0:
+                    plantCreateDelegate(gameObject, PlantType.PLANT1);
+                    break;
+                case 1:
+                    plantCreateDelegate(gameObject, PlantType.PLANT2);
+                    break;
+            }
         }
     }
 }
