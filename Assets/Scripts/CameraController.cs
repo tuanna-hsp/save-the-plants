@@ -6,7 +6,7 @@ public class CameraController : MonoBehaviour
     public float moveSensivityX = 10.0f;
     public float moveSensivityY = 10.0f;
     public float orthoZoomSpeed = 0.05f;
-    public float minZoom = 1.0f;
+    public float minZoom = 0.5f;
     public float maxZoom = 2.0f;
     public bool needUpdateMoveSensivity = true;
 

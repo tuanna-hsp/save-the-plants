@@ -11,12 +11,15 @@ public class PlacePlant : MonoBehaviour
     private GameObject plant;
     private GameObject rangePreview;
     private GameManagerBehavior gameManager;
+    private Canvas hudCanvas;
+    private GameObject plantSelector;
 
     // Use this for initialization
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
         upgradeMenu = GameObject.Find("UpgradePanel");
+        hudCanvas = GameObject.Find("HUD Canvas").GetComponent<Canvas>();
 
         // Add offset to make range preview always behind selector
         rangePreview = (GameObject) Instantiate(
@@ -33,7 +36,10 @@ public class PlacePlant : MonoBehaviour
     {
         if (plant == null)
         {
-            showPlantSelector();
+            if (plantSelector == null)
+            {
+                showPlantSelector();
+            }
         }
         else
         {
@@ -57,7 +63,7 @@ public class PlacePlant : MonoBehaviour
 
     private void showPlantSelector()
     {
-        GameObject plantSelector = (GameObject) Instantiate(plantSelectorPrefab, transform.position, Quaternion.identity);
+        plantSelector = (GameObject) Instantiate(plantSelectorPrefab, transform.position, Quaternion.identity);
         SelectorBehaviour behaviour = plantSelector.GetComponent<SelectorBehaviour>();
         behaviour.plantCreateDelegate = onCreatePlant;
         behaviour.plantPreviewDelegate = onPreviewPlant;
@@ -80,14 +86,20 @@ public class PlacePlant : MonoBehaviour
     private void showUpgradeMenu()
     {
         RectTransform rectTransform = (RectTransform) upgradeMenu.transform;
-        Vector2 position = transform.position;
-        Vector2 viewportPoint = Camera.main.WorldToViewportPoint(position);
-        rectTransform.position = viewportPoint; 
-        //if (shouldShowPopUpBelow())
-        //{
-        //    //newPosition -= new Vector3(0, rectTransform.rect.height);
-        //}
-        //upgradeMenu.transform.position = newPosition;
+        Vector3 targetPosition = transform.position;
+        Vector3 viewportPoint = Camera.main.WorldToScreenPoint(targetPosition);
+        rectTransform.position += (viewportPoint - rectTransform.position);
+        
+        float halfHeight = (rectTransform.rect.height / 2) * hudCanvas.scaleFactor * rectTransform.localScale.y;
+        Vector3 offset = new Vector3(0, halfHeight, 0);
+        if (shouldShowPopUpBelow())
+        {
+            rectTransform.position -= offset;
+        }
+        else
+        {
+            rectTransform.position += offset;
+        }
 
         UpgradeBehaviour behaviour = upgradeMenu.GetComponent<UpgradeBehaviour>();
         behaviour.OnPlantSold = sellPlant;
@@ -99,7 +111,8 @@ public class PlacePlant : MonoBehaviour
 
     private void onCreatePlant(GameObject selector, PlantType plantType)
     {
-        Destroy(selector);
+        Destroy(plantSelector);
+        plantSelector = null;
         switch (plantType)
         {
             case PlantType.PLANT1:
