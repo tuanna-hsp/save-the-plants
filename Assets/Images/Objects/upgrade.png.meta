@@ -1,0 +1,116 @@
+fileFormatVersion: 2
+guid: 45f47508f28e9f34a889c1ac6df6d147
+timeCreated: 1461922210
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: upgrade_0
+    21300002: upgrade_1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: upgrade_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 273
+        height: 151
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -136.5, y: 75.5}
+        - {x: -136.5, y: -74.5}
+        - {x: -135.5, y: -75.5}
+        - {x: 129.5, y: -75.5}
+        - {x: 136.5, y: -66.5}
+        - {x: 136.5, y: 75.5}
+      - - {x: -97.5, y: 57.5}
+        - {x: 82.5, y: 51.5}
+        - {x: 100.5, y: -56.5}
+        - {x: -95.5, y: -55.5}
+      - - {x: -109.5, y: -47.5}
+        - {x: -14.5, y: -47.5}
+        - {x: -9.5, y: -31.5}
+        - {x: -9.5, y: 33.5}
+        - {x: -43.5, y: 56.5}
+        - {x: -86.5, y: 56.5}
+        - {x: -96.5, y: 48.5}
+        - {x: -109.5, y: 17.5}
+    - name: upgrade_1
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 3
+        width: 275
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 121.5, y: 74}
+        - {x: -125.5, y: 74}
+        - {x: -137.5, y: 62}
+        - {x: -137.5, y: -66}
+        - {x: -121.5, y: -74}
+        - {x: 114.5, y: -74}
+        - {x: 137.5, y: -55}
+        - {x: 137.5, y: 58}
+      - - {x: -116.5, y: -36}
+        - {x: -120.5, y: -33}
+        - {x: -82.5, y: -55}
+        - {x: -55.5, y: -55}
+        - {x: -6.5, y: -39}
+        - {x: 105.5, y: 33}
+        - {x: 99.5, y: -55}
+        - {x: -100.5, y: -55}
+        - {x: -101.5, y: -54}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

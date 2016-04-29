@@ -19,6 +19,10 @@ public class UpgradeBehaviour : MonoBehaviour
                 // Hide upgrade button when level already max
                 upgradeButton.SetActive(false);
             }
+            else
+            {
+                upgradeButton.SetActive(true);
+            }
         }
     }
 

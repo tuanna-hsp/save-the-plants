@@ -6,10 +6,12 @@ public class PlacePlant : MonoBehaviour
     public GameObject plant1Prefab;
     public GameObject plant2Prefab;
     public GameObject plant3Prefab;
-    public GameObject plantSelectorPrefab;
+    public GameObject topSelectorPrefab;
+    public GameObject bottomSelectorPrefab;
     public GameObject rangePrefab;
 
-    private GameObject upgradeMenu;
+    private GameObject topUpgradeMenu;
+    private GameObject bottomUpgradeMenu;
     private GameObject plant;
     private GameObject rangePreview;
     private GameManagerBehavior gameManager;
@@ -20,7 +22,8 @@ public class PlacePlant : MonoBehaviour
     void Start()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
-        upgradeMenu = GameObject.Find("UpgradePanel");
+        topUpgradeMenu = GameObject.Find("UpgradePanelTop");
+        bottomUpgradeMenu = GameObject.Find("UpgradePanelBottom");
         hudCanvas = GameObject.Find("HUD Canvas").GetComponent<Canvas>();
 
         // Add offset to make range preview always behind selector
@@ -67,18 +70,25 @@ public class PlacePlant : MonoBehaviour
 
     private void showPlantSelector()
     {
-        plantSelector = (GameObject) Instantiate(plantSelectorPrefab, transform.position, Quaternion.identity);
-        SelectorBehaviour behaviour = plantSelector.GetComponent<SelectorBehaviour>();
-        behaviour.plantCreateDelegate = onCreatePlant;
-        behaviour.plantPreviewDelegate = onPreviewPlant;
 
         // By default the selector show above current object, 
         // check and adjust selector position y to display correctly
         if (shouldShowPopUpBelow())
         {
+            plantSelector = (GameObject) Instantiate(bottomSelectorPrefab, transform.position, Quaternion.identity);
             RectTransform rectTransform = (RectTransform) plantSelector.transform;
-            rectTransform.position -= new Vector3(0, rectTransform.rect.height);
+            rectTransform.position -= new Vector3(3, rectTransform.rect.height);
         }
+        else
+        {
+            plantSelector = (GameObject) Instantiate(topSelectorPrefab, transform.position, Quaternion.identity);
+            RectTransform rectTransform = (RectTransform) plantSelector.transform;
+            rectTransform.position -= new Vector3(4.5f, 0);
+        }
+
+        SelectorBehaviour behaviour = plantSelector.GetComponent<SelectorBehaviour>();
+        behaviour.plantCreateDelegate = onCreatePlant;
+        behaviour.plantPreviewDelegate = onPreviewPlant;
     }
 
     // Whether current open spot lied in the upper part of the screen
@@ -89,19 +99,36 @@ public class PlacePlant : MonoBehaviour
 
     private void showUpgradeMenu()
     {
-        RectTransform rectTransform = (RectTransform) upgradeMenu.transform;
+        GameObject upgradeMenu;
+        RectTransform rectTransform;
+        bool shouldShowBelow = shouldShowPopUpBelow();
+        if (shouldShowBelow)
+        {
+            rectTransform = (RectTransform) bottomUpgradeMenu.transform;
+        }
+        else 
+        {
+            rectTransform = (RectTransform) topUpgradeMenu.transform;
+        }
+
+
         Vector3 targetPosition = transform.position;
         Vector3 viewportPoint = Camera.main.WorldToScreenPoint(targetPosition);
         rectTransform.position += (viewportPoint - rectTransform.position);
         
         float halfHeight = (rectTransform.rect.height / 2) * hudCanvas.scaleFactor * rectTransform.localScale.y;
-        Vector3 offset = new Vector3(0, halfHeight, 0);
-        if (shouldShowPopUpBelow())
+        if (shouldShowBelow)
         {
+            float xOffset = 0 * hudCanvas.scaleFactor * rectTransform.localScale.x;
+            Vector3 offset = new Vector3(xOffset, halfHeight, 0);
+            upgradeMenu = bottomUpgradeMenu;
             rectTransform.position -= offset;
         }
         else
         {
+            float xOffset = -(115 * hudCanvas.scaleFactor * rectTransform.localScale.x);
+            Vector3 offset = new Vector3(xOffset, halfHeight, 0);
+            upgradeMenu = topUpgradeMenu;
             rectTransform.position += offset;
         }
 
