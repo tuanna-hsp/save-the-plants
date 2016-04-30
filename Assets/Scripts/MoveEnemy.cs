@@ -18,6 +18,8 @@ public class MoveEnemy : MonoBehaviour {
             // Fly enemy only need start and end point
             waypoints = new GameObject[] { waypoints[0], waypoints[waypoints.Length - 1] };
         }
+
+        RotateIntoMoveDirection();
 	}
 	
 	// Update is called once per frame
@@ -53,6 +55,7 @@ public class MoveEnemy : MonoBehaviour {
 	}
 
 	private void RotateIntoMoveDirection() {
+        Debug.Log("Enemy rotate");
 		//1
 		Vector3 newStartPosition = waypoints [currentWaypoint].transform.position;
 		Vector3 newEndPosition = waypoints [currentWaypoint + 1].transform.position;

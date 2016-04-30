@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerBehavior : MonoBehaviour {
 
@@ -74,8 +75,6 @@ public class GameManagerBehavior : MonoBehaviour {
 
         if (!PersistantManager.IsTutorialShown())
         {
-            // Pause game and show tutorial screen
-            //Time.timeScale = 0;
             ShowTutorial();
             PersistantManager.SetTutorialAsShown();
         }
@@ -102,14 +101,27 @@ public class GameManagerBehavior : MonoBehaviour {
         pauseMenu.SetActive(false);
     }
 
+    public void RestartLevel()
+    {
+
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("menu");
+    }
+
     public void ShowTutorial()
     {
         tutorial.SetActive(true);
+        // Pause game
+        Time.timeScale = 0;
     }
 
     public void HideTutorial()
     {
         tutorial.SetActive(false);
+        Time.timeScale = 1;
     }
 }
 
