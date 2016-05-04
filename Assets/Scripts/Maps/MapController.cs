@@ -1,32 +1,33 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class MapController : MonoBehaviour {
 
     public void OnMap1ButtonCLick()
     {
-        Constant.map = 1;
+        PersistantManager.setSelectedMap(1);
     }
 
     public void OnMap2ButtonClick()
     {
-        Constant.map = 2;
+        PersistantManager.setSelectedMap(2);
     }
 
     public void OnMap3ButtonClick()
     {
-        Constant.map = 3;
+        PersistantManager.setSelectedMap(3);
     }
 
     public void OnBackButtonClicl()
     {
-        Application.LoadLevel("menu");
+        SceneManager.LoadScene("menu");
     }
 
     public void OnContinueButtonClick()
     {
-        Application.LoadLevel("level");
+        SceneManager.LoadScene("level");
     }
 
 }
