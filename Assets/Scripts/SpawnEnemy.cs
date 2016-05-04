@@ -43,6 +43,7 @@ public class SpawnEnemy : MonoBehaviour {
 		lastSpawnTime = Time.time;
 		gameManager =
 			GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
+        gameManager.WaveCount = waves.Length;
 
         Difficulty difficulty = (Difficulty) PlayerPrefs.GetInt(Constant.DIFFICULTY_PREFS, (int) Difficulty.MEDIUM);
         switch (difficulty)
@@ -60,6 +61,11 @@ public class SpawnEnemy : MonoBehaviour {
                 }
                 break;
         }
+
+        // Update target position according to current map
+        GameObject target = GameObject.Find("Target");
+        GameObject pos = GameObject.Find("TargetPosition");
+        target.transform.position = pos.transform.position;
 	}
 	
 	// Update is called once per frame
@@ -82,16 +88,14 @@ public class SpawnEnemy : MonoBehaviour {
 			// 4 
 			if (enemiesSpawned == waves[currentWave].maxEnemies &&
 			    GameObject.FindGameObjectWithTag("Enemy") == null) {
-				gameManager.Wave++;
-				gameManager.Gold = Mathf.RoundToInt(gameManager.Gold * 1.1f);
-				enemiesSpawned = 0;
-				lastSpawnTime = Time.time;
-			}
+                gameManager.Wave++;
+                gameManager.Gold = Mathf.RoundToInt(gameManager.Gold * 1.1f);
+                enemiesSpawned = 0;
+                lastSpawnTime = Time.time;
+            }
 			// 5 
 		} else {
-			gameManager.gameOver = true;
-			GameObject gameOverText = GameObject.FindGameObjectWithTag ("GameWon");
-			gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
+            gameManager.doGameWon();
 		}	
 	}
 }

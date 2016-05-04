@@ -19,20 +19,37 @@ public class GameManagerBehavior : MonoBehaviour {
 	public GameObject[] nextWaveLabels;
     public GameObject pauseMenu;
     public GameObject tutorial;
+    public GameObject gameOverPanel;
+    public GameObject gameWonPanel;
 
-	public bool gameOver = false;
+    public GameObject[] mapPrefabs;
+
+	public bool gameEnded = false;
+
+    private int waveCount;
+    public int WaveCount
+    {
+        set {
+            waveCount = value;
+            waveLabel.text = (wave + 1) + "/" + WaveCount;
+        }
+
+        get {
+            return waveCount;
+        }
+    }
 
 	private int wave;
 	public int Wave {
 		get { return wave; }
 		set {
 			wave = value;
-			if (!gameOver) {
+			if (!gameEnded) {
 				for (int i = 0; i < nextWaveLabels.Length; i++) {
 					nextWaveLabels[i].GetComponent<Animator>().SetTrigger("nextWave");
 				}
 			}
-			waveLabel.text = "" + (wave + 1);
+			waveLabel.text = (wave + 1) + "/" + WaveCount;
 		}
 	}
 
@@ -51,10 +68,8 @@ public class GameManagerBehavior : MonoBehaviour {
 			health = value;
 			healthLabel.text = "" + health;
 			// 2
-			if (health <= 0 && !gameOver) {
-				gameOver = true;
-				GameObject gameOverText = GameObject.FindGameObjectWithTag ("GameOver");
-				gameOverText.GetComponent<Animator>().SetBool("gameOver", true);
+			if (health <= 0 && !gameEnded) {
+                doGameOver();
 			}
 			// 3 
 			for (int i = 0; i < healthIndicator.Length; i++) {
@@ -77,6 +92,20 @@ public class GameManagerBehavior : MonoBehaviour {
         {
             ShowTutorial();
             PersistantManager.SetTutorialAsShown();
+        }
+        
+        // Instantiate map
+        switch (PersistantManager.getSelectedMap())
+        {
+            case 1:
+                GameObject.Instantiate(mapPrefabs[0], mapPrefabs[0].transform.position, Quaternion.identity);
+                break;
+            case 2:
+                GameObject.Instantiate(mapPrefabs[1], mapPrefabs[1].transform.position, Quaternion.identity);
+                break;
+            case 3:
+                GameObject.Instantiate(mapPrefabs[2], mapPrefabs[2].transform.position, Quaternion.identity);
+                break;
         }
 	}
 	
@@ -103,7 +132,8 @@ public class GameManagerBehavior : MonoBehaviour {
 
     public void RestartLevel()
     {
-
+        SceneManager.LoadScene("GameScene");
+        Time.timeScale = 1;
     }
 
     public void BackToMenu()
@@ -122,6 +152,37 @@ public class GameManagerBehavior : MonoBehaviour {
     {
         tutorial.SetActive(false);
         Time.timeScale = 1;
+    }
+
+    public void nextLevel()
+    {
+
+    }
+
+    public void doGameOver()
+    {
+        gameEnded = true;
+        gameOverPanel.SetActive(true);
+    }
+
+    public void doGameWon()
+    {
+        // Calculate score
+        int score = gold;
+        int healthRemaining = 0;
+        foreach (GameObject indicator in healthIndicator)
+        {
+            if (indicator.activeInHierarchy)
+            {
+                healthRemaining++;
+            }
+        }
+        score += healthRemaining * 1000;
+        int star = score / (healthIndicator.Length * 1000 / 3);
+
+        gameEnded = true;
+        gameWonPanel.SetActive(true);
+        gameWonPanel.GetComponent<GameWonBehaviour>().setData(score, star);
     }
 }
 

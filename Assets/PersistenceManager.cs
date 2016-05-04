@@ -12,4 +12,9 @@ public static class PersistantManager
     {
         PlayerPrefs.SetInt("show_tutorial", 1);
     }
+
+    public static int getSelectedMap()
+    {
+        return PlayerPrefs.GetInt("selected_map", 1);
+    }
 }

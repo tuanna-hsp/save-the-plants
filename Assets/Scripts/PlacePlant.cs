@@ -159,8 +159,12 @@ public class PlacePlant : MonoBehaviour
         {
             AudioSource audioSource = gameObject.GetComponent<AudioSource>();
             audioSource.PlayOneShot(audioSource.clip);
+            gameManager.Gold -= plant.GetComponent<PlantData>().CurrentLevel.cost;
         }
         rangePreview.SetActive(false);
+
+        // Disable idle animation
+        GetComponent<Animator>().SetBool("HasPlant", true);
     }
 
     private void onPreviewPlant(PlantType type)
@@ -206,5 +210,7 @@ public class PlacePlant : MonoBehaviour
         // Sell for half-price
         gameManager.Gold += plant.GetComponent<PlantData>().CurrentLevel.cost / 2;
         Destroy(plant);
+
+        GetComponent<Animator>().SetBool("HasPlant", false);
     }
 }
