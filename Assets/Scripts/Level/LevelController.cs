@@ -1,32 +1,38 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LevelController : MonoBehaviour {
 
+    public Text description;
+
 	public void OnEasyButtonCLick()
     {
-        Constant.level = 1;
+        PersistantManager.setDifficulty(Difficulty.EASY);
+        description.GetComponent<Text>().text = "Reduce the number of enemies by half and increase spawn interval";
     }
 
     public void OnMediumButtonClick()
     {
-        Constant.level = 2;
+        PersistantManager.setDifficulty(Difficulty.MEDIUM);
+        description.GetComponent<Text>().text = "Standard enemy quatity and spawn interval";
     }
 
     public void OnInsaneButtonClick()
     {
-        Constant.level = 3;
+        PersistantManager.setDifficulty(Difficulty.HARD);
+        description.GetComponent<Text>().text = "Double the number of enemies and reduce spawn interval.";
     }
 
     public void OnBackButtonClick()
     {
-        Application.LoadLevel("map");
+        SceneManager.LoadScene("map");
     }
 
     public void OnQuitToMenu()
     {
-        Application.LoadLevel("menu");
+        SceneManager.LoadScene("menu");
     }
 
     public void OnStartGame()

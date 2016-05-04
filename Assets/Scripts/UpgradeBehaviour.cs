@@ -6,6 +6,8 @@ public class UpgradeBehaviour : MonoBehaviour
 {
     public Text upgradeText;
     public GameObject upgradeButton;
+    public Text upgradeCostText;
+    public Text sellValueText;
     
     public GameObject CurrentPlant
     {
@@ -19,6 +21,12 @@ public class UpgradeBehaviour : MonoBehaviour
                 // Hide upgrade button when level already max
                 upgradeButton.SetActive(false);
             }
+            else
+            {
+                upgradeButton.SetActive(true);
+                upgradeCostText.GetComponent<Text>().text = nextLevel.cost + "";
+            }
+            sellValueText.GetComponent<Text>().text = monsterData.CurrentLevel.cost / 2 + "";
         }
     }
 
@@ -39,7 +47,18 @@ public class UpgradeBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetMouseButtonDown(0))
+        {
+            // Check if mouse clicked outside the selector, if it is then destroy this game object
+            RectTransform rectTransform = GetComponent<RectTransform>();
+            // Convert mouse pos to this object local space
+            Vector3 mousePos = rectTransform.InverseTransformPoint(Input.mousePosition);
+            // rectTransform.rect is in local space
+            if (!rectTransform.rect.Contains(mousePos))
+            {
+                gameObject.SetActive(false);
+            }
+        }
     }
 
     private string getNextLevelInfo()
