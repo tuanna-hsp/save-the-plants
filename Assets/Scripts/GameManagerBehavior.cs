@@ -21,6 +21,7 @@ public class GameManagerBehavior : MonoBehaviour {
     public GameObject tutorial;
     public GameObject gameOverPanel;
     public GameObject gameWonPanel;
+    public GameObject quitPanel;
 
     public GameObject[] mapPrefabs;
 
@@ -111,8 +112,12 @@ public class GameManagerBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        // Esc (PC) or back button (Android)
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            quitPanel.SetActive(true);
+        }
+    }
 
     public void PauseGame()
     {
@@ -183,6 +188,12 @@ public class GameManagerBehavior : MonoBehaviour {
         gameEnded = true;
         gameWonPanel.SetActive(true);
         gameWonPanel.GetComponent<GameWonBehaviour>().setData(score, star);
+    }
+
+    public void CancelQuit()
+    {
+        quitPanel.SetActive(false);
+        Time.timeScale = 1;
     }
 }
 

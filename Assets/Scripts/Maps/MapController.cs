@@ -30,4 +30,12 @@ public class MapController : MonoBehaviour {
         SceneManager.LoadScene("level");
     }
 
+    void Update()
+    {
+        // Esc (PC) or back button (Android)
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            OnBackButtonClicl();
+        }
+    }
 }

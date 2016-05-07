@@ -39,4 +39,13 @@ public class LevelController : MonoBehaviour {
     {
         SceneManager.LoadScene("GameScene");
     }
+
+    void Update()
+    {
+        // Esc (PC) or back button (Android)
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            OnBackButtonClick();
+        }
+    }
 }
