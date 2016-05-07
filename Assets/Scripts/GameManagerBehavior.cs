@@ -96,7 +96,7 @@ public class GameManagerBehavior : MonoBehaviour {
         }
         
         // Instantiate map
-        switch (PersistantManager.getSelectedMap())
+        switch (PersistantManager.GetSelectedMap())
         {
             case 1:
                 GameObject.Instantiate(mapPrefabs[0], mapPrefabs[0].transform.position, Quaternion.identity);

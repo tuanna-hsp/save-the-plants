@@ -7,17 +7,17 @@ public class MapController : MonoBehaviour {
 
     public void OnMap1ButtonCLick()
     {
-        PersistantManager.setSelectedMap(1);
+        PersistantManager.SetSelectedMap(1);
     }
 
     public void OnMap2ButtonClick()
     {
-        PersistantManager.setSelectedMap(2);
+        PersistantManager.SetSelectedMap(2);
     }
 
     public void OnMap3ButtonClick()
     {
-        PersistantManager.setSelectedMap(3);
+        PersistantManager.SetSelectedMap(3);
     }
 
     public void OnBackButtonClicl()

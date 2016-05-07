@@ -45,7 +45,7 @@ public class SpawnEnemy : MonoBehaviour {
 			GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
         gameManager.WaveCount = waves.Length;
 
-        Difficulty difficulty = PersistantManager.getDifficulty();
+        Difficulty difficulty = PersistantManager.GetDifficulty();
         switch (difficulty)
         {
             case Difficulty.EASY:

@@ -9,19 +9,19 @@ public class LevelController : MonoBehaviour {
 
 	public void OnEasyButtonCLick()
     {
-        PersistantManager.setDifficulty(Difficulty.EASY);
+        PersistantManager.SetDifficulty(Difficulty.EASY);
         description.GetComponent<Text>().text = "Reduce the number of enemies by half and increase spawn interval";
     }
 
     public void OnMediumButtonClick()
     {
-        PersistantManager.setDifficulty(Difficulty.MEDIUM);
+        PersistantManager.SetDifficulty(Difficulty.MEDIUM);
         description.GetComponent<Text>().text = "Standard enemy quatity and spawn interval";
     }
 
     public void OnInsaneButtonClick()
     {
-        PersistantManager.setDifficulty(Difficulty.HARD);
+        PersistantManager.SetDifficulty(Difficulty.HARD);
         description.GetComponent<Text>().text = "Double the number of enemies and reduce spawn interval.";
     }
 

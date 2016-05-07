@@ -13,23 +13,33 @@ public static class PersistantManager
         PlayerPrefs.SetInt("show_tutorial", 1);
     }
 
-    public static int getSelectedMap()
+    public static int GetSelectedMap()
     {
         return PlayerPrefs.GetInt("selected_map", 1);
     }
 
-    public static void setSelectedMap(int mapLevel)
+    public static void SetSelectedMap(int mapLevel)
     {
         PlayerPrefs.SetInt("selected_map", mapLevel);
     }
 
-    public static Difficulty getDifficulty()
+    public static Difficulty GetDifficulty()
     {
         return (Difficulty) PlayerPrefs.GetInt(Constant.DIFFICULTY_PREFS, (int) Difficulty.MEDIUM);
     }
 
-    public static void setDifficulty(Difficulty difficulty)
+    public static void SetDifficulty(Difficulty difficulty)
     {
         PlayerPrefs.SetInt(Constant.DIFFICULTY_PREFS, (int) difficulty);
+    }
+
+    public static void SaveProfile(string profileName)
+    {
+        PlayerPrefs.SetString("profile", profileName);
+    }
+
+    public static string GetProfile()
+    {
+        return PlayerPrefs.GetString("profile", "Default");
     }
 }
