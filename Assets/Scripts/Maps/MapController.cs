@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MapController : MonoBehaviour {
 
@@ -37,5 +38,12 @@ public class MapController : MonoBehaviour {
         {
             OnBackButtonClicl();
         }
+    }
+
+    void Start()
+    {
+        Button map2 = GameObject.Find("map2").GetComponent<Button>();
+        map2.Select();
+        map2.onClick.Invoke();
     }
 }

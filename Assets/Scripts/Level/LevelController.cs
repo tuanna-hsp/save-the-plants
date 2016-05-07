@@ -48,4 +48,11 @@ public class LevelController : MonoBehaviour {
             OnBackButtonClick();
         }
     }
+
+    void Start()
+    {
+        Button mediumButton = GameObject.Find("medium").GetComponent<Button>();
+        mediumButton.Select();
+        mediumButton.onClick.Invoke();
+    }
 }
