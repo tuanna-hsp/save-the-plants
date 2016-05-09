@@ -10,6 +10,8 @@ public class MoveEnemy : MonoBehaviour {
 	public float speed = 1.0f;
     public bool isFly = false;
 
+    private bool isVibrationEnabled;
+
 	// Use this for initialization
 	void Start () {
 		lastWaypointSwitchTime = Time.time;
@@ -20,6 +22,13 @@ public class MoveEnemy : MonoBehaviour {
         }
 
         RotateIntoMoveDirection();
+
+        if (!PersistantManager.IsAmbientEnabled())
+        {
+            GetComponent<AudioSource>().enabled = false;
+        }
+
+        isVibrationEnabled = PersistantManager.IsVibrationEnabled();
 	}
 	
 	// Update is called once per frame
@@ -50,6 +59,10 @@ public class MoveEnemy : MonoBehaviour {
 				GameManagerBehavior gameManager =
 					GameObject.Find("GameManager").GetComponent<GameManagerBehavior>();
 				gameManager.Health -= 1;
+                if (isVibrationEnabled)
+                {
+                    Handheld.Vibrate();
+                }
 			}
 		}
 	}

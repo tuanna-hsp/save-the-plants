@@ -7,11 +7,9 @@ public class MenuController : MonoBehaviour {
 
     public GameObject quitPanel;
     public GameObject profileInputPanel;
-    public Button soundButton;
+    public GameObject settingPanel;
     public Text input;
     public Text profileText;
-    public Text soundText;
-    public Sprite soundOn, soundOff;
 
     public void OnPlayButtonClick()
     {
@@ -72,20 +70,13 @@ public class MenuController : MonoBehaviour {
         profileInputPanel.SetActive(true);
     }
 
-    public void ToggleSound()
+    public void OpenSetting()
     {
-        Image soundImage = soundButton.GetComponent<Image>();
-        if (soundImage.sprite == soundOn)
-        {
-            soundImage.sprite = soundOff;
-            AudioListener.pause = true;
-            soundText.text = "Off";
-        }
-        else
-        {
-            soundImage.sprite = soundOn;
-            AudioListener.pause = false;
-            soundText.text = "On";
-        }
+        settingPanel.SetActive(true);
+    }
+
+    public void CloseSetting()
+    {
+        settingPanel.SetActive(false);
     }
 }

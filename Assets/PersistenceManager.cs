@@ -42,4 +42,37 @@ public static class PersistantManager
     {
         return PlayerPrefs.GetString("profile", "Default");
     }
+
+    public static void EnableMusic(bool enabled)
+    {
+        PlayerPrefs.SetInt("music", enabled ? 1 : 0);
+    }
+
+    public static bool IsMusicEnabled()
+    {
+        int enabled = PlayerPrefs.GetInt("music", 1);
+        return enabled == 1 ? true : false;
+    }
+
+    public static void EnableAmbient(bool enabled)
+    {
+        PlayerPrefs.SetInt("ambient", enabled ? 1 : 0);
+    }
+
+    public static bool IsAmbientEnabled()
+    {
+        int enabled = PlayerPrefs.GetInt("ambient", 1);
+        return enabled == 1 ? true : false;
+    }
+
+    public static void EnableVibration(bool enabled)
+    {
+        PlayerPrefs.SetInt("vibration", enabled ? 1 : 0);
+    }
+
+    public static bool IsVibrationEnabled()
+    {
+        int enabled = PlayerPrefs.GetInt("vibration", 1);
+        return enabled == 1 ? true : false;
+    }
 }

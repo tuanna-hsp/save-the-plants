@@ -20,6 +20,11 @@ public class CameraController : MonoBehaviour
         // Camera size has invert ratio to zoom level
         maxCameraSize_ = camera_.orthographicSize / minZoom;
         minCameraSize_ = camera_.orthographicSize / maxZoom;
+
+        if (!PersistantManager.IsMusicEnabled())
+        {
+            GetComponent<AudioSource>().enabled = false;
+        }
     }
 
     // Update is called once per frame

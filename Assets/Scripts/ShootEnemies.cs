@@ -14,6 +14,11 @@ public class ShootEnemies : MonoBehaviour {
 		enemiesInRange = new List<GameObject>();
 		lastShotTime = Time.time;
 		monsterData = gameObject.GetComponentInChildren<PlantData> ();
+
+        if (!PersistantManager.IsAmbientEnabled())
+        {
+            GetComponent<AudioSource>().enabled = false;
+        }
 	}
 	
 	// Update is called once per frame

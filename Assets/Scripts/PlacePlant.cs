@@ -17,6 +17,7 @@ public class PlacePlant : MonoBehaviour
     private GameManagerBehavior gameManager;
     private Canvas hudCanvas;
     private GameObject plantSelector;
+    private bool isAmbientEnabled;
 
     // Use this for initialization
     void Start()
@@ -30,6 +31,8 @@ public class PlacePlant : MonoBehaviour
         rangePreview = (GameObject) Instantiate(
             rangePrefab, transform.position + new Vector3(0, 0, 1), Quaternion.identity);
         rangePreview.SetActive(false);
+
+        isAmbientEnabled = PersistantManager.IsAmbientEnabled();
     }
 
     // Update is called once per frame
@@ -52,25 +55,10 @@ public class PlacePlant : MonoBehaviour
         {
             showUpgradeMenu();
         }
-        //if (canPlaceMonster ()) {
-        //    plant = (GameObject) Instantiate(plantPrefab, transform.position, Quaternion.identity);
-
-        //  		AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-        //	audioSource.PlayOneShot(audioSource.clip);
-
-        //	gameManager.Gold -= plant.GetComponent<MonsterData>().CurrentLevel.cost;
-        //} else if (canUpgradeMonster()) {
-        //	plant.GetComponent<MonsterData>().increaseLevel();
-        //	AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-        //	audioSource.PlayOneShot(audioSource.clip);
-
-        //	gameManager.Gold -= plant.GetComponent<MonsterData>().CurrentLevel.cost;
-        //}
     }
 
     private void showPlantSelector()
     {
-
         // By default the selector show above current object, 
         // check and adjust selector position y to display correctly
         if (shouldShowPopUpBelow())
@@ -157,8 +145,11 @@ public class PlacePlant : MonoBehaviour
         }
         if (plant != null)
         {
-            AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-            audioSource.PlayOneShot(audioSource.clip);
+            if (isAmbientEnabled)
+            {
+                AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+                audioSource.PlayOneShot(audioSource.clip);
+            }
             gameManager.Gold -= plant.GetComponent<PlantData>().CurrentLevel.cost;
         }
         rangePreview.SetActive(false);
@@ -199,8 +190,11 @@ public class PlacePlant : MonoBehaviour
     private void upgradePlant()
     {
         plant.GetComponent<PlantData>().increaseLevel();
-        AudioSource audioSource = gameObject.GetComponent<AudioSource>();
-        audioSource.PlayOneShot(audioSource.clip);
+        if (isAmbientEnabled)
+        {
+            AudioSource audioSource = gameObject.GetComponent<AudioSource>();
+            audioSource.PlayOneShot(audioSource.clip);
+        }
 
         gameManager.Gold -= plant.GetComponent<PlantData>().CurrentLevel.cost;
     }
