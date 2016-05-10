@@ -141,6 +141,7 @@ public class PlacePlant : MonoBehaviour
                 plant = (GameObject) Instantiate(plant2Prefab, transform.position, Quaternion.identity);
                 break;
             case PlantType.PLANT3:
+                plant = (GameObject) Instantiate(plant3Prefab, transform.position, Quaternion.identity);
                 break;
         }
         if (plant != null)
@@ -172,6 +173,7 @@ public class PlacePlant : MonoBehaviour
                 rangeRadius = plant2Prefab.GetComponent<CircleCollider2D>().radius;
                 break;
             case PlantType.PLANT3:
+                rangeRadius = plant3Prefab.GetComponent<CircleCollider2D>().radius;
                 break;
         }
 

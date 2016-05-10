@@ -11,9 +11,15 @@ public class MoveEnemy : MonoBehaviour {
     public bool isFly = false;
 
     private bool isVibrationEnabled;
+    private float totalSlowTime;
+    private float maxSlowTime;
+    private bool isBeingSlow;
+    private Animator animator;
 
 	// Use this for initialization
 	void Start () {
+        animator = GetComponent<Animator>();
+
 		lastWaypointSwitchTime = Time.time;
         if (isFly)
         {
@@ -36,9 +42,20 @@ public class MoveEnemy : MonoBehaviour {
 		// 1 
 		Vector3 startPosition = waypoints [currentWaypoint].transform.position;
 		Vector3 endPosition = waypoints [currentWaypoint + 1].transform.position;
-		// 2 
+        // 2 
+        float tempSpeed = speed;
+        if (isBeingSlow)
+        {
+            totalSlowTime += Time.deltaTime;
+            if (totalSlowTime >= maxSlowTime)
+            {
+                isBeingSlow = false;
+                animator.SetBool("isSlow", false);
+            }
+            tempSpeed = tempSpeed * 60 / 100;
+        }
 		float pathLength = Vector3.Distance (startPosition, endPosition);
-		float totalTimeForPath = pathLength / speed;
+		float totalTimeForPath = pathLength / tempSpeed;
 		float currentTimeOnPath = Time.time - lastWaypointSwitchTime;
 		gameObject.transform.position = Vector3.Lerp (startPosition, endPosition, currentTimeOnPath / totalTimeForPath);
 		// 3 
@@ -96,4 +113,12 @@ public class MoveEnemy : MonoBehaviour {
 		}
 		return distance;
 	}
+
+    public void MakeSlow(int timeInSecond)
+    {
+        isBeingSlow = true;
+        maxSlowTime = timeInSecond;
+        totalSlowTime = 0;
+        animator.SetBool("isSlow", true);
+    }
 }

@@ -86,6 +86,9 @@ public class SelectorBehaviour : MonoBehaviour
                 case 1:
                     plantCreateDelegate(gameObject, PlantType.PLANT2);
                     break;
+                case 2:
+                    plantCreateDelegate(gameObject, PlantType.PLANT3);
+                    break;
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BulletBehavior : MonoBehaviour {
@@ -8,6 +8,7 @@ public class BulletBehavior : MonoBehaviour {
 	public GameObject target;
 	public Vector3 startPosition;
 	public Vector3 targetPosition;
+    public bool isSlowBullet;
 	
 	private float distance;
 	private float startTime;
@@ -31,6 +32,10 @@ public class BulletBehavior : MonoBehaviour {
 		// 2 
 		if (gameObject.transform.position.Equals(targetPosition)) {
 			if (target != null) {
+                if (isSlowBullet)
+                {
+                    target.GetComponent<MoveEnemy>().MakeSlow(3);
+                }
 				// 3
 				Transform healthBarTransform = target.transform.FindChild("HealthBar");
 				HealthBar healthBar = 
